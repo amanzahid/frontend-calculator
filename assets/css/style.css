@@ -1,0 +1,405 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  display: grid;
+  grid-template-rows: 3.5rem auto fit-content(7rem);
+  grid-template-areas:
+    "header"
+    "main"
+    "footer";
+}
+header {
+  padding: 0 1rem;
+  background: linear-gradient(
+    to bottom right,
+    rgb(2, 78, 255),
+    rgb(188, 2, 255)
+  );
+  grid-area: header;
+  display: flex;
+  justify-content: space-between;
+  color: rgb(255, 255, 255);
+  align-items: center;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 3.5rem;
+  z-index: 5;
+  position: relative;
+}
+#history-btn{
+  position: absolute;
+  left: 0.8rem;
+  display: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+.calc-history__mobile{
+  padding-top: 4rem;
+  transform: translateX(-75vw);
+  display: none;
+  opacity: 0;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  width: 70vw;
+  height: 100vh;
+  background: rgb(255, 255, 255);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+  z-index: 4;
+  transition: all 0.5s linear;
+}
+.calc-history__mobile h3{
+  text-align: right;
+  margin: 0.5rem 1rem 0.5rem 0;
+}
+.mobile-history__container{
+  height: calc(100vh - 7rem);
+  overflow-y: auto;
+}
+main {
+  grid-area: main;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.backdrop{
+  display: none;
+  opacity: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  transition: opacity 0.3s linear;
+}
+.info-modal{
+  display: none;
+  opacity: 0;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -30%);
+  z-index: 6;
+  padding: 1rem;
+  width: 30rem;
+  background: rgb(255,255,255);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  line-height: 1.5rem;
+  transition: all 0.3s linear;
+}
+.close-btn{
+  background: rgb(0, 120, 226);
+  color: rgb(255, 255, 255);
+  font-size: 1rem;
+  border: none;
+  border-radius: 10px;
+  padding: 0.3rem 1rem;
+  cursor: pointer;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+}
+.active-modal{
+  transform: translate(-50%, -50%);
+}
+.active-mob-history,
+.active{
+  display: block;
+  opacity: 1;
+}
+.active-mob-history{
+  transform: translateX(0)
+}
+.calc-area {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(53, 53, 53);
+  box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+.calc-history,
+.calc {
+  padding: 0.5rem;
+  border-radius: 8px;
+  display: grid;
+  grid-template-rows: 5rem auto;
+  grid-template-areas:
+  "screen"
+    "body";
+  height: 24rem;
+  width: 18rem;
+  z-index: 2;
+  background-color: rgb(111, 111, 111);
+}
+.calc-history-container{
+  border-radius: 8px;
+  height: 24rem;
+  background-color: rgb(111, 111, 111);
+  position: absolute;
+  z-index: 1;
+  transform: translateX(0);
+  transition: all 500ms linear;
+  padding-bottom: 0.8rem;
+}
+.calc-history-container h3{
+  margin: 0.5rem 0;
+  text-align: center;
+  color: rgb(255,255,255);
+}
+.calc-history {
+  height: 20rem;
+  overflow-y: auto;
+  z-index: unset;
+}
+.history-visible{
+  transform: translateX(-18.2rem);
+}
+.history-toggler{
+  grid-area: history;
+}
+.calc-history__items {
+  list-style: none;
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+  font-size: 0.7rem;
+}
+.calc-history__item {
+  position: relative;
+  background: rgb(255, 255, 255);
+  border-radius: 8px;
+  padding: 0.3rem 0.5rem;
+  margin: 0.5rem 0;
+  text-align: right;
+}
+#info-btn{
+  cursor: pointer;
+  padding: 0.3rem 0.5rem;
+  border-radius: 10px;
+  border: none;
+  background: none;
+  color: inherit;
+  font-size: 1rem;
+}
+#info-btn:hover{
+  background: rgb(255, 255, 255);
+  color: rgb(111, 111, 111);
+}
+#close-btn{
+  position: absolute;
+  left: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.1rem;
+  color: rgb(255,0,0);
+  font-weight: bold;
+  cursor: pointer;
+}
+#log-result {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.calc-screen {
+  grid-area: screen;
+  width: 100%;
+}
+#expression,
+#total {
+  background: rgb(255, 255, 255);
+  text-align: right;
+  border: none;
+  font-weight: bold;
+  padding: 0.5rem;
+}
+#total {
+  color: rgb(170, 170, 170);
+  font-size: 0.9rem;
+  width: 100%;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+#expression {
+  width: 100%;
+  font-size: 1.8rem;
+}
+#expression:focus,
+#total:focus {
+  outline: none;
+}
+.calc-body {
+  grid-area: body;
+  padding-top: 0.2rem;
+}
+.calc-body__num-pad {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(20%, 4);
+  grid-template-areas:
+    "history clear divide multiply"
+    "seven eight nine minus"
+    "four five six plus"
+    "one two three plus"
+    "zero zero decimal enter";
+  grid-gap: 3px 3px;
+}
+.history-toggler,
+.btn {
+  background: rgb(255, 255, 255);
+  border: none;
+  cursor: pointer;
+  border-radius: 2px;
+  font-size: 1.4rem;
+}
+.history-toggler:hover,
+.history-toggler:focus,
+.btn:hover,
+.btn:focus {
+  background: rgb(240, 240, 240);
+}
+#clear {
+  grid-area: clear;
+  color: rgb(255, 255, 255);
+  background-color: rgb(0, 136, 255);
+}
+#clear:focus,
+#clear:hover {
+  background-color: rgb(0, 120, 226);
+}
+#divide {
+  color: rgb(255, 255, 255);
+  background-color: rgb(171, 171, 171);
+  grid-area: divide;
+}
+#multipy {
+  color: rgb(255, 255, 255);
+  background-color: rgb(171, 171, 171);
+  grid-area: multiply;
+}
+#minus {
+  color: rgb(255, 255, 255);
+  background-color: rgb(171, 171, 171);
+  grid-area: minus;
+}
+#seven {
+  grid-area: seven;
+}
+#eight {
+  grid-area: eight;
+}
+#nine {
+  grid-area: nine;
+}
+#four {
+  grid-area: four;
+}
+#five {
+  grid-area: five;
+}
+#six {
+  grid-area: six;
+}
+#plus {
+  color: rgb(255, 255, 255);
+  background-color: rgb(171, 171, 171);
+  grid-area: plus;
+}
+#one {
+  grid-area: one;
+}
+#two {
+  grid-area: two;
+}
+#three {
+  grid-area: three;
+}
+#enter {
+  color: rgb(255, 255, 255);
+  background-color: rgb(171, 171, 171);
+  grid-area: enter;
+}
+#zero {
+  grid-area: zero;
+}
+#decimal {
+  grid-area: decimal;
+}
+#divide:focus,
+#divide:hover,
+#multipy:focus,
+#multipy:hover,
+#minus:focus,
+#minus:hover,
+#plus:focus,
+#plus:hover,
+#enter:focus,
+#enter:hover {
+  background: rgb(143, 143, 143);
+}
+footer {
+  grid-area: footer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(44, 44, 44);
+  padding: 0.5rem 0;
+}
+footer p {
+  margin: 0;
+  color: rgb(255, 255, 255);
+}
+@media(max-width: 40rem){
+  .calc-body__num-pad {
+    grid-template-areas:
+      "clear divide multiply minus"
+      "seven eight nine plus"
+      "four five six plus"
+      "one two three enter"
+      "zero zero decimal enter";
+  }
+  header h1{
+    font-size: 1.5rem;
+    margin-left: 1.5rem;
+  }
+  .calc-history-container,
+  .history-toggler{
+    display: none
+  }
+  #history-btn{
+    display: block;
+  }
+  main{
+    padding-top: 1rem;
+  }
+  .calc-area{
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+  .calc{
+    order: 1;
+  }
+  .calc-history{
+    display: none;
+  }
+  .info-modal{
+    width: 80%;
+  }
+}

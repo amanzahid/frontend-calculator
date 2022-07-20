@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator App</title>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/all.min.css" />
+  </head>
+  <body>
+    <header>
+      <span id="history-btn"><i class="fas fa-bars"></i></span>
+      <h1 class="logo">Simple Calculator</h1>
+      <button id="info-btn">Help</button>
+    </header>
+    <div class="calc-history__mobile">
+      <h3>History</h3>
+      <div class="mobile-history__container">
+        <ul class="calc-history__items"></ul>
+      </div>
+    </div>
+    <main>
+      <div class="backdrop"></div>
+      <div class="info-modal">
+        <p>
+          This is a simple calculator. You can click and use buttons or you can
+          use shortcut keys. Numbers and Operator keys can be used for inputs.
+          Enter for '=', Backspace to delete, and Esc to clear everything.
+        </p>
+        <button class="close-btn">Close</button>
+      </div>
+      <div class="calc-area">
+        <div class="calc-history-container">
+          <h3>History</h3>
+          <div class="calc-history">
+            <ul class="calc-history__items"></ul>
+          </div>
+        </div>
+        <div class="calc">
+          <div class="calc-screen">
+            <input type="text" id="total" disabled />
+            <input type="text" id="expression" value="0" disabled />
+          </div>
+          <div class="calc-body">
+            <div class="calc-body__num-pad">
+              <button class="history-toggler"><i class="fas fa-undo"></i></Button>
+              <button data-val="c" class="btn" id="clear">C</button>
+              <button data-val="/" class="btn" id="divide">/</button>
+              <button data-val="*" class="btn" id="multipy">*</button>
+              <button data-val="-" class="btn" id="minus">-</button>
+              <button data-val="7" class="btn" id="seven">7</button>
+              <button data-val="8" class="btn" id="eight">8</button>
+              <button data-val="9" class="btn" id="nine">9</button>
+              <button data-val="4" class="btn" id="four">4</button>
+              <button data-val="5" class="btn" id="five">5</button>
+              <button data-val="6" class="btn" id="six">6</button>
+              <button data-val="+" class="btn" id="plus">+</button>
+              <button data-val="1" class="btn" id="one">1</button>
+              <button data-val="2" class="btn" id="two">2</button>
+              <button data-val="3" class="btn" id="three">3</button>
+              <button data-val="=" class="btn" id="enter">=</button>
+              <button data-val="0" class="btn" id="zero">0</button>
+              <button data-val="." class="btn" id="decimal">.</button>
+            </div>
+          </div>
+        </div>
+        <div class="calc-info"></div>
+      </div>
+    </main>
+    <footer>
+      <p>Project by Aman Zahid</p>
+    </footer>
+
+    <!-- <script src="./dist/main.js"></script> -->
+    <script src="./assets/js/vendor.js"></script>
+    <script src="./assets/js/index.js"></script>
+  </body>
+</html>
